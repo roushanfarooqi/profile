@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammed Roushan — Product Support Lead</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f2444;
+    --navy-mid: #1b3a6b;
+    --blue: #2e6db4;
+    --accent: #4a9eff;
+    --gold: #c9a84c;
+    --cream: #f9f7f3;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e5e1d8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--blue);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    max-width: 42ch;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--navy-mid); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+  }
+  .btn-outline:hover { background: var(--navy); color: white; }
+
+  /* HERO STATS */
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.75rem 2rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.6s ease both;
+  }
+  .stat-card:hover { transform: translateX(6px); box-shadow: -4px 0 0 var(--blue), 0 4px 20px rgba(0,0,0,0.06); }
+  .stat-card:nth-child(2) { animation-delay: 0.1s; margin-left: 2rem; }
+  .stat-card:nth-child(3) { animation-delay: 0.2s; }
+  .stat-card:nth-child(4) { animation-delay: 0.3s; margin-left: 2rem; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: var(--navy);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .stat-num span { color: var(--blue); }
+  .stat-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION */
+  section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--blue); }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--navy);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* DIVIDER */
+  .full-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-meta { padding-top: 0.25rem; }
+  .timeline-dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  .timeline-company {
+    font-size: 0.85rem;
+    color: var(--blue);
+    font-weight: 500;
+  }
+  .timeline-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .timeline-content p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.75rem;
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--navy-mid);
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    background: #eef4ff;
+    color: var(--blue);
+    border-radius: 2px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .badge::before { content: '▲'; font-size: 0.6rem; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 4px;
+  }
+  .skill-group h4 {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .skill-list li {
+    font-size: 0.88rem;
+    color: var(--text);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .skill-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+    font-size: 0.7rem;
+    top: 0.15em;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--navy);
+    padding: 6rem 4rem;
+    text-align: center;
+  }
+  .contact-section .section-label { justify-content: center; color: var(--accent); }
+  .contact-section .section-label::before { background: var(--accent); }
+  .contact-section .section-title { color: white; margin-bottom: 1rem; }
+  .contact-section p { color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; font-size: 1rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    padding: 1.5rem;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .role-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0.75rem 0 0.25rem;
+    padding: 0;
+  }
+  .role-bullets li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .role-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-size: 0.75rem;
+    top: 0.18em;
+  }
+  .role-bullets li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .stat-card:nth-child(2), .stat-card:nth-child(4) { margin-left: 0; }
+    .contact-section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Mohammed Roushan</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-label">Bengaluru, India · AdTech & MMP</div>
+      <h1>Product Support <em>Team Lead</em></h1>
+      <p class="hero-desc">11+ years of experience building and leading high-performing support teams across AdTech and Mobile Measurement — driving measurable outcomes in resolution efficiency, client satisfaction, and operational excellence.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="https://www.linkedin.com/in/mohammed-roushan-88bb1163/" target="_blank" class="btn btn-outline">LinkedIn Profile</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stat-card">
+        <div class="stat-num">11<span>+</span></div>
+        <div class="stat-label">Years of AdTech &<br>MMP Industry Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">23<span>%</span></div>
+        <div class="stat-label">Reduction in Average<br>Ticket Resolution Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">30<span>%</span></div>
+        <div class="stat-label">Decrease in Average<br>Queue Backlog</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-label">Global Clients Supported<br>Across 6 Environments</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career History</div>
+  <div class="section-title">Work Experience</div>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-dates">Nov 2023 — Present</div>
+        <div class="timeline-company">Singular</div>
+      </div>
+      <div class="timeline-content">
+        <div class="badge">Current Role</div>
+        <h3>Product Support Team Lead</h3>
+        <p>Leading end-to-end support operations across all Singular MMP products — Attribution, SKAN, Analytics, Audiences, Ad Monetization, and ETL. Responsible for team functioning, quality, and growth while driving measurable improvements through data-led decision making and process innovation.</p>
+        <ul class="role-bullets">
+          <li><strong>Team & Operations:</strong> Oversee day-to-day KPIs, SLA compliance, and CSAT targets. Manage shift rosters, leave planning, and case distribution to maintain optimal coverage.</li>
+          <li><strong>Analytics & BI:</strong> Build Zendesk Explore dashboards tracking ticket volumes, escalation rates, and backlogs. Analyse support trends to surface product improvement opportunities with the Product team.</li>
+          <li><strong>Strategic Accounts:</strong> Oversee support for high-ARR and churn-risk clients with dedicated POCs, aligning internally and externally to maintain stable support sentiment.</li>
+          <li><strong>Workflow & Automation:</strong> Created Zendesk–Slack integrations, macros, and triggers. Contributing to AI copilot and triage automation initiatives to reduce resolution time.</li>
+          <li><strong>Recruitment & Training:</strong> Interview, onboard, and mentor new support engineers. Champion a Knowledge Centric Support (KCS) culture through documentation and knowledge sharing sessions.</li>
+        </ul>
+        <div class="tags" style="margin-top:1rem;">
+          <span class="tag">Team Leadership</span><span class="tag">SLA/CSAT</span><span class="tag">Zendesk Explore</span><span class="tag">KCS</span><span class="tag">AI Copilot</span><span class="tag">Analytics & BI</span><span class="tag">Strategic Accounts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-dates">Apr 2022 — Oct 2023</div>
+        <div class="timeline-company">Singular</div>
+      </div>
+      <div class="timeline-content">
+        <h3>Senior Product Support Engineer</h3>
+        <p>Served as primary point of contact for Singular's global clients, resolving complex technical issues across Attribution, SKAN, and Analytics. Mentored and guided team members through complex troubleshooting and trained new joiners on Singular products and workflows.</p>
+        <div class="tags">
+          <span class="tag">MMP Support</span><span class="tag">SKAN</span><span class="tag">ETL</span><span class="tag">Postbacks</span><span class="tag">Mentoring</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-dates">Mar 2021 — Mar 2022</div>
+        <div class="timeline-company">Operative</div>
+      </div>
+      <div class="timeline-content">
+        <h3>Senior Product Support Engineer</h3>
+        <p>Functioned as a hybrid resource across Support and Solutions Engineering teams — contributing to both complex client troubleshooting and new client onboarding. Collaborated with Professional Services to translate client requirements during go-lives, while delivering detailed RCA and L2/L3 support globally.</p>
+        <div class="tags">
+          <span class="tag">L2/L3 Support</span><span class="tag">Solutions Engineering</span><span class="tag">Client Onboarding</span><span class="tag">RCA</span><span class="tag">Global Teams</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-dates">Apr 2019 — Feb 2021</div>
+        <div class="timeline-company">Operative</div>
+      </div>
+      <div class="timeline-content">
+        <h3>Product Support Engineer</h3>
+        <p>Provided application support across the Operative.One platform, implementing backend configurations via MySQL Flags and XML files, managing Cron jobs, and monitoring ETL and Microservices pipelines. Escalated complex cases to T3 with detailed reproduction steps, logs, and proposed investigation paths.</p>
+        <div class="tags">
+          <span class="tag">MySQL</span><span class="tag">XML Config</span><span class="tag">CronTab</span><span class="tag">ETL</span><span class="tag">Microservices</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-dates">Feb 2016 — Mar 2019</div>
+        <div class="timeline-company">Operative</div>
+      </div>
+      <div class="timeline-content">
+        <h3>Configuration Specialist</h3>
+        <p>Configured Media and Ad-Ops requirements for 50+ clients across 6 environments (including staging, AWS, and production) in Operative One, achieving a 98% completion rate across 27 consecutive months. Served as liaison between Senior Consultants and Tier 2 Support on advanced configuration and escalation management.</p>
+        <div class="tags">
+          <span class="tag">Operative One</span><span class="tag">UI Config</span><span class="tag">AWS</span><span class="tag">Ad-Ops</span><span class="tag">Client Training</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-dates">Sep 2014 — Jan 2016</div>
+        <div class="timeline-company">Operative</div>
+      </div>
+      <div class="timeline-content">
+        <h3>Ad Operations Specialist</h3>
+        <p>Managed end-to-end campaign trafficking, performance reporting, and client communication for high-profile accounts including ESPN. Worked directly with offshore and onshore managers across all aspects of traffic management.</p>
+        <div class="tags">
+          <span class="tag">Campaign Trafficking</span><span class="tag">Ad Operations</span><span class="tag">Client Servicing</span><span class="tag">ESPN</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <div class="section-title">Skills & Tools</div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <h4>Technical</h4>
+      <ul class="skill-list">
+        <li>Zendesk (Explore, Macros, Triggers)</li>
+        <li>MySQL & XML Configuration</li>
+        <li>ETL & MSBI Pipelines</li>
+        <li>Postman & API Testing</li>
+        <li>JavaScript & HTML</li>
+        <li>Jira & Salesforce</li>
+        <li>CronTab / Job Scheduling</li>
+      </ul>
+    </div>
+    <div class="skill-group reveal">
+      <h4>Leadership & Operations</h4>
+      <ul class="skill-list">
+        <li>Team Building & Mentoring</li>
+        <li>SLA / CSAT Management</li>
+        <li>Escalation & Incident Management</li>
+        <li>Shift Scheduling & Rostering</li>
+        <li>Performance Monitoring</li>
+        <li>Recruitment & Onboarding</li>
+      </ul>
+    </div>
+    <div class="skill-group reveal">
+      <h4>Process & Strategy</h4>
+      <ul class="skill-list">
+        <li>Knowledge Centric Support (KCS)</li>
+        <li>Analytics & Business Intelligence</li>
+        <li>Workflow Optimisation</li>
+        <li>AI Copilot & Automation</li>
+        <li>Triage & Quality Monitoring</li>
+        <li>Cross-functional Collaboration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Get In Touch</h2>
+  <p>Open to new opportunities, collaborations, and conversations.</p>
+  <div class="contact-links">
+    <a href="mailto:roushanfarooqi@gmail.com" class="contact-link">✉ roushanfarooqi@gmail.com</a>
+    <a href="https://www.linkedin.com/in/mohammed-roushan-88bb1163/" target="_blank" class="contact-link">in LinkedIn</a>
+    <a href="tel:+917204447886" class="contact-link">✆ +91 7204447886</a>
+  </div>
+</div>
+
+<footer>© 2026 Mohammed Roushan · Bengaluru, India</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
